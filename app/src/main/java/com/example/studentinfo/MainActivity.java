@@ -1,5 +1,6 @@
 package com.example.studentinfo;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.*;
@@ -10,7 +11,7 @@ import android.view.Gravity;
 public class MainActivity extends AppCompatActivity
 {
     EditText etName, etRoll;
-    Button btnAdd, btnView, btnUpdate, btnDelete;
+    Button btnAdd, btnView, btnUpdate, btnStdRecords, btnDelete;
     TableLayout tableLayout;
     dbhelper db;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity
         btnAdd = findViewById(R.id.btnAdd);
         btnView = findViewById(R.id.btnView);
         btnUpdate = findViewById(R.id.btnUpdate);
+        btnStdRecords = findViewById(R.id.btnStdRecords);
         btnDelete = findViewById(R.id.btnDelete);
         tableLayout = findViewById(R.id.tableLayout);
         db = new dbhelper(this);

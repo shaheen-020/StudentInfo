@@ -52,7 +52,14 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="#03DAC5" />
-
+        <Button
+            android:id="@+id/btnStdRecords"
+            android:text="Student Records"
+            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="#03DAC5" />
         <Button
             android:id="@+id/btnDelete"
             android:text="Delete Student"
@@ -62,6 +69,7 @@
             android:textColor="@color/white"
             android:backgroundTint="@color/viewColor"
             android:layout_marginTop="15dp"/>
+
 
         <TextView
             android:layout_width="match_parent"
