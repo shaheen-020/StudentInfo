@@ -3,7 +3,7 @@
     android:padding="24dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="#4A61D3">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,26 +16,39 @@
     <Button
         android:id="@+id/btnAdd"
         android:text="Add Student"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="300dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/black" />
+
 
     <Button
         android:id="@+id/btnView"
         android:text="View Students"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="300dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/green"  />
 
     <Button
         android:id="@+id/btnUpdate"
         android:text="Update Student"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="300dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/green"  />
 
     <Button
         android:id="@+id/btnStdRecords"
         android:text="Search Student Records"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="300dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/green" />
 
 
 </LinearLayout>

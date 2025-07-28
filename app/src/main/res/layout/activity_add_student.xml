@@ -9,16 +9,23 @@
         android:id="@+id/etAddRoll"
         android:hint="Enter Student ID"
         android:inputType="text"
-        android:layout_width="match_parent" android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/etAddName"
         android:hint="Enter Student Name"
         android:inputType="text"
-        android:layout_width="match_parent" android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btnSaveStudent"
         android:text="Save Student"
-        android:layout_width="match_parent" android:layout_height="wrap_content" />
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"/>
 </LinearLayout>
