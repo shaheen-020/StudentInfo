@@ -82,5 +82,22 @@ class StudentServiceTest {
         assertTrue(result);
         verify(mockDbHelper).insertStudent(eq(testRoll), eq(testName));
     }
-
+    @Test
+    void studentService_shouldNotBeNull() {
+        assertNotNull(studentService); // ensures service is initialized
+    }
+    @Test
+    void testNull() {
+        when(mockDbHelper.searchStudents("unknown")).thenReturn(null);
+        List<String[]> result = studentService.searchStudents("unknown");
+        assertNull(result, "Expected result to be null when DB returns null");
+    }
+    @Test
+    void testNotNull() {
+        List<String[]> dummyData = new ArrayList<>();
+        dummyData.add(new String[]{"101", "Shahinur"});
+        when(mockDbHelper.searchStudents("101")).thenReturn(dummyData);
+        List<String[]> result = studentService.searchStudents("101");
+        assertNotNull(result, "Expected result to be non-null when DB returns list");
+    }
 }
