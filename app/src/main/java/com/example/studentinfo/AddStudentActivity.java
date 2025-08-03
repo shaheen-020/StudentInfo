@@ -10,6 +10,7 @@ public class AddStudentActivity extends AppCompatActivity {
     EditText etRoll, etName;
     Button btnSave;
     DbHelper db;
+    StudentService sv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,16 +21,17 @@ public class AddStudentActivity extends AppCompatActivity {
         etName = findViewById(R.id.etAddName);
         btnSave = findViewById(R.id.btnSaveStudent);
         db = new DbHelper(this);
+        sv = new StudentService(db);
 
         btnSave.setOnClickListener(v -> {
             String roll = etRoll.getText().toString().trim();
             String name = etName.getText().toString().trim();
             if (roll.isEmpty() || name.isEmpty()) {
                 Toast.makeText(this, "Enter both ID and name", Toast.LENGTH_SHORT).show();
-            } else if (db.idExists(roll)) {
+            } else if (sv.idExists(roll)) {
                 Toast.makeText(this, "ID already exists", Toast.LENGTH_SHORT).show();
             } else {
-                boolean ok = db.insertStudent(roll, name);
+                boolean ok = sv.insertStudent(roll, name);
                 Toast.makeText(this, ok ? "Added successfully" : "Insert failed", Toast.LENGTH_SHORT).show();
                 if (ok) {
                     etRoll.setText("");
