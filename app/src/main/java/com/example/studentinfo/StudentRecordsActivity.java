@@ -1,5 +1,4 @@
 package com.example.studentinfo;
-
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -12,12 +11,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 public class StudentRecordsActivity extends AppCompatActivity {
 
     EditText etQuery;
     Button btnSearch;
     TableLayout tableLayout;
     DbHelper db;
+    StudentService studentService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class StudentRecordsActivity extends AppCompatActivity {
         btnSearch = findViewById(R.id.btnSearch);
         tableLayout = findViewById(R.id.tableLayoutRecords);
         db = new DbHelper(this);
+        studentService = new StudentService(db);
 
         btnSearch.setOnClickListener(v -> {
             String q = etQuery.getText().toString().trim();
@@ -36,21 +39,20 @@ public class StudentRecordsActivity extends AppCompatActivity {
                 return;
             }
 
-            tableLayout.removeAllViews(); // clear previous results
+            tableLayout.removeAllViews(); // Clear previous results
             addHeader();
 
-            Cursor c = db.searchStudents(q);
-            if (c.getCount() == 0) {
+            List<String[]> students = studentService.searchStudents(q);
+            if (students.isEmpty()) {
                 Toast.makeText(this, "No results found", Toast.LENGTH_SHORT).show();
             } else {
-                while (c.moveToNext()) {
+                for (String[] student : students) {
                     TableRow row = new TableRow(this);
-                    row.addView(makeText(c.getString(0))); // ID
-                    row.addView(makeText(c.getString(1))); // Name
+                    row.addView(makeText(student[0])); // ID
+                    row.addView(makeText(student[1])); // Name
                     tableLayout.addView(row);
                 }
             }
-            c.close();
         });
     }
 

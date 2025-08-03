@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "studentinfo.db";
@@ -62,16 +65,28 @@ public class DbHelper extends SQLiteOpenHelper {
         int rowsAffected = db.update(TABLE_NAME, cv, COL_ID + " = ?", new String[]{id});
         return rowsAffected > 0;
     }
-
     public boolean deleteStudent(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         int rows = db.delete(TABLE_NAME, COL_ID + " = ?", new String[]{id});
         return rows > 0;
     }
-
-    public Cursor searchStudents(String query) {
+    public List<String[]>  searchStudents(String query) {
+        List<String[]> students = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME +
+        Cursor cursor= db.rawQuery("SELECT * FROM " + TABLE_NAME +
                 " WHERE " + COL_ID + " = ? OR " + COL_NAME + " LIKE ?", new String[]{query, "%" + query + "%"});
+        if (cursor != null) {
+            try {
+                while (cursor.moveToNext()) {
+                    String[] student = new String[2];
+                    student[0] = cursor.getString(0); // ID
+                    student[1] = cursor.getString(1); // Name
+                    students.add(student);
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        return  students;
     }
 }

@@ -57,7 +57,6 @@ public class ViewStudentsActivity extends AppCompatActivity {
         h.addView(makeText("Action", true));
         tableLayout.addView(h);
     }
-
     TextView makeText(String s) { return makeText(s, false); }
 
     TextView makeText(String s, boolean hdr) {
