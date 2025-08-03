@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -92,6 +93,12 @@ class StudentServiceTest {
             when(mockDbHelper.insertStudent("232_134_019", "Safe User")).thenReturn(true);
             assertDoesNotThrow(() -> studentService.insertStudent("019", "Safe User"));
         }
+        @Test
+        void insertStudent_shouldThrowException_whenDbFails() {
+            when(mockDbHelper.insertStudent(any(), any())).thenThrow(new RuntimeException("DB error"));
+            assertThrows(RuntimeException.class, () -> studentService.insertStudent("019", "Error Test"));
+        }
+
 
 
     }
