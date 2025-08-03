@@ -1,6 +1,7 @@
 package com.example.studentinfo;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -58,6 +59,28 @@ class StudentServiceTest {
         boolean result = studentService.insertStudent(roll, name);
         assertEquals(expectedResult, result);
         verify(mockDbHelper).insertStudent(roll, name);
+    }
+    @ParameterizedTest
+    @CsvSource({
+            "'', Name, false",
+            "123, '', false",
+            "'', '', false"
+    })
+    void insertStudent_shouldHandleEmptyParameters(String roll, String name, boolean expectedResult) {
+        when(mockDbHelper.insertStudent(roll, name)).thenReturn(expectedResult);
+        boolean result = studentService.insertStudent(roll, name);
+        assertEquals(expectedResult, result);
+        verify(mockDbHelper).insertStudent(roll, name);
+    }
+
+    @Test
+    void insertStudent_shouldPassCorrectParametersToDbHelper() {
+        String testRoll = "020 ";
+        String testName = "Shaheen Rashid ";
+        when(mockDbHelper.insertStudent(anyString(), anyString())).thenReturn(true);
+        boolean result = studentService.insertStudent(testRoll, testName);
+        assertTrue(result);
+        verify(mockDbHelper).insertStudent(eq(testRoll), eq(testName));
     }
 
 }
