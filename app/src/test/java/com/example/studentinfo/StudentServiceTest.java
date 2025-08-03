@@ -23,7 +23,7 @@ class StudentServiceTest {
     }
     @ParameterizedTest
     @ValueSource(strings = {"123", "456", "789"})
-    void idExists_shouldReturnTrue_whenIdExists(String rollNumber) {
+    void testAssertTrue(String rollNumber) {
         when(mockDbHelper.idExists(rollNumber)).thenReturn(true);
         boolean result = studentService.idExists(rollNumber);
         assertTrue(result);
@@ -31,7 +31,7 @@ class StudentServiceTest {
     }
     @ParameterizedTest
     @ValueSource(strings = {"999", "000", "111"})
-    void idExists_shouldReturnFalse_whenIdNotExists(String rollNumber) {
+    void testAssertFalse(String rollNumber) {
 
         when(mockDbHelper.idExists(rollNumber)).thenReturn(false);
         boolean result = studentService.idExists(rollNumber);
@@ -44,7 +44,7 @@ class StudentServiceTest {
             "456, Jane Smith, true",
             "789, Alice Johnson, false"
     })
-    void insertStudent_shouldReturnExpectedResult(String roll, String name, boolean expectedResult) {
+    void testAssertEquals(String roll, String name, boolean expectedResult) {
         when(mockDbHelper.insertStudent(roll, name)).thenReturn(expectedResult);
         boolean result = studentService.insertStudent(roll, name);
         assertEquals(expectedResult, result);
@@ -56,7 +56,7 @@ class StudentServiceTest {
             "123, '', false",
             "'', '', false"
     })
-    void insertStudent_shouldHandleEmptyParameters(String roll, String name, boolean expectedResult) {
+    void testAssertEqual(String roll, String name, boolean expectedResult) {
         when(mockDbHelper.insertStudent(roll, name)).thenReturn(expectedResult);
         boolean result = studentService.insertStudent(roll, name);
         assertEquals(expectedResult, result);
@@ -64,7 +64,7 @@ class StudentServiceTest {
     }
 
     @Test
-    void insertStudent_shouldPassCorrectParametersToDbHelper() {
+    void testAssertTrue() {
         String testRoll = "020 ";
         String testName = "Shaheen Rashid ";
         when(mockDbHelper.insertStudent(anyString(), anyString())).thenReturn(true);
@@ -73,8 +73,8 @@ class StudentServiceTest {
         verify(mockDbHelper).insertStudent(eq(testRoll), eq(testName));
     }
     @Test
-    void studentService_shouldNotBeNull() {
-        assertNotNull(studentService); // ensures service is initialized
+    void testAssertNotNull() {
+        assertNotNull(studentService);
     }
     @Test
     void testNull() {

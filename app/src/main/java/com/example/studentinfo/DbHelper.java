@@ -1,16 +1,12 @@
 package com.example.studentinfo;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
 import android.database.Cursor;
-
 import java.util.ArrayList;
 import java.util.List;
-
 public class DbHelper extends SQLiteOpenHelper {
-
     public static final String DB_NAME = "studentinfo.db";
     public static final int DB_VERSION = 1;
 

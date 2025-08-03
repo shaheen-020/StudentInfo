@@ -1,5 +1,4 @@
 package com.example.studentinfo;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.Button;
@@ -8,9 +7,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.List;
 
 public class StudentRecordsActivity extends AppCompatActivity {
@@ -24,7 +21,7 @@ public class StudentRecordsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_records); // Make sure this XML file exists
+        setContentView(R.layout.activity_student_records);
 
         etQuery = findViewById(R.id.etSearch);
         btnSearch = findViewById(R.id.btnSearch);
@@ -39,7 +36,7 @@ public class StudentRecordsActivity extends AppCompatActivity {
                 return;
             }
 
-            tableLayout.removeAllViews(); // Clear previous results
+            tableLayout.removeAllViews();
             addHeader();
 
             List<String[]> students = studentService.searchStudents(q);

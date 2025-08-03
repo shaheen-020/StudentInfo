@@ -1,5 +1,4 @@
 package com.example.studentinfo;
-
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +15,6 @@ public class AddStudentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
-
         etRoll = findViewById(R.id.etAddRoll);
         etName = findViewById(R.id.etAddName);
         btnSave = findViewById(R.id.btnSaveStudent);

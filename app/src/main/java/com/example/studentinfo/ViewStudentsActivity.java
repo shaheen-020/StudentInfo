@@ -1,5 +1,4 @@
 package com.example.studentinfo;
-
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Gravity;
