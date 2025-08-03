@@ -87,5 +87,11 @@ class StudentServiceTest {
                 studentService.insertStudent("019", "Quick User");
             });
         }
+        @Test
+        void insertStudent_shouldNotThrowException() {
+            when(mockDbHelper.insertStudent("232_134_019", "Safe User")).thenReturn(true);
+            assertDoesNotThrow(() -> studentService.insertStudent("019", "Safe User"));
+        }
+
 
     }
