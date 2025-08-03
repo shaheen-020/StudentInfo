@@ -1,5 +1,4 @@
 package com.example.studentinfo;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,23 +7,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
-import android.database.Cursor;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-
 @ExtendWith(MockitoExtension.class)
 class StudentServiceTest {
-
     @Mock
     private DbHelper mockDbHelper;
-
     private StudentService studentService;
 
     @BeforeEach
@@ -99,5 +89,17 @@ class StudentServiceTest {
         when(mockDbHelper.searchStudents("101")).thenReturn(dummyData);
         List<String[]> result = studentService.searchStudents("101");
         assertNotNull(result, "Expected result to be non-null when DB returns list");
+    }
+    @Test
+    void testAssertEqual() {
+        when(mockDbHelper.insertStudent("303", "shaheen")).thenReturn(true);
+        boolean result = studentService.insertStudent("303", "shaheen");
+        assertEquals(true, result, "Student should be inserted successfully");
+    }
+    @Test
+    void testAssertNotEquals() {
+        when(mockDbHelper.insertStudent("404", "Ali")).thenReturn(true);
+        boolean result = studentService.insertStudent("404", "Ali");
+        assertNotEquals(false, result, "Result should not be false if DB returns true");
     }
 }
