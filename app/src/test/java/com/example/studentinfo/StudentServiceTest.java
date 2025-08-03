@@ -102,4 +102,14 @@ class StudentServiceTest {
         boolean result = studentService.insertStudent("404", "Ali");
         assertNotEquals(false, result, "Result should not be false if DB returns true");
     }
+    @Test
+    void testAssertThrows() {
+        when(mockDbHelper.insertStudent(null, "Ali")).thenThrow(new IllegalArgumentException("Roll can't be null"));
+        assertThrows(IllegalArgumentException.class, () -> studentService.insertStudent(null, "Ali"));
+    }
+    @Test
+    void testAssertDoesNotThrow() {
+        when(mockDbHelper.insertStudent("500", "Fatema")).thenReturn(true);
+        assertDoesNotThrow(() -> studentService.insertStudent("500", "Fatema"), "Valid input should not throw");
+    }
 }
