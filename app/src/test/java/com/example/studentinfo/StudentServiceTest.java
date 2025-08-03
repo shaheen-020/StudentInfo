@@ -49,21 +49,21 @@ class StudentServiceTest {
 
         assertEquals(0, results.size());
         assertTrue(results.isEmpty());
-    @ParameterizedTest
-    @ValueSource(strings = {"999", "000", "111"})
-    void idExists_shouldReturnFalse_whenIdNotExists(String rollNumber) {
-        // Arrange
-        when(mockDbHelper.idExists(rollNumber)).thenReturn(false);
+        @ParameterizedTest
+        @ValueSource(strings = {"999", "000", "111"})
+        void idExists_shouldReturnFalse_whenIdNotExists (String rollNumber){
+            // Arrange
+            when(mockDbHelper.idExists(rollNumber)).thenReturn(false);
 
-        // Act
-        boolean result = studentService.idExists(rollNumber);
+            // Act
+            boolean result = studentService.idExists(rollNumber);
 
-        // Assert
-        assertFalse(result);
-        verify(mockDbHelper).idExists(rollNumber);
-    }
+            // Assert
+            assertFalse(result);
+            verify(mockDbHelper).idExists(rollNumber);
+        }
         @Test
-        void searchStudents_shouldReturnMultipleStudents() {
+        void searchStudents_shouldReturnMultipleStudents () {
             // Arrange
             List<String[]> mockResults = Arrays.asList(
                     new String[]{"123", "Mutahar"},
@@ -79,4 +79,13 @@ class StudentServiceTest {
             assertArrayEquals(new String[]{"123", "Mutahar"}, results.get(0));
             assertArrayEquals(new String[]{"456", "Rahon"}, results.get(1));
         }
+        @Test
+        @Timeout(1)
+        void insertStudent_shouldCompleteQuickly () {
+            when(mockDbHelper.insertStudent("019", "Quick User")).thenReturn(true);
+            assertTimeout(Duration.ofMillis(500), () -> {
+                studentService.insertStudent("019", "Quick User");
+            });
+        }
+
     }
