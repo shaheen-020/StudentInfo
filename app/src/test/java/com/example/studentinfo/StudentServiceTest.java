@@ -112,4 +112,12 @@ class StudentServiceTest {
         when(mockDbHelper.insertStudent("500", "Fatema")).thenReturn(true);
         assertDoesNotThrow(() -> studentService.insertStudent("500", "Fatema"), "Valid input should not throw");
     }
+    @Test
+    void testFail() {
+        when(mockDbHelper.insertStudent("777", "Ahmed")).thenReturn(true);
+        boolean result = studentService.insertStudent("777", "Ahmed");
+        if (!result) {
+            fail("Insert failed: DB returned false for valid input");
+        }
+    }
 }
