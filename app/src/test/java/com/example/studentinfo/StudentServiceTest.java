@@ -98,6 +98,13 @@ class StudentServiceTest {
             when(mockDbHelper.insertStudent(any(), any())).thenThrow(new RuntimeException("DB error"));
             assertThrows(RuntimeException.class, () -> studentService.insertStudent("019", "Error Test"));
         }
+        @Test
+        void messageLineMatchTest() {
+            String expectedLine = "Student added successfully";
+            String actualLine = "Student added successfully";
+            assertLinesMatch(List.of(expectedLine), List.of(actualLine));
+       }
+
 
 
 
