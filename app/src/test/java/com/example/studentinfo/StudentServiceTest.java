@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
@@ -61,4 +62,21 @@ class StudentServiceTest {
         assertFalse(result);
         verify(mockDbHelper).idExists(rollNumber);
     }
-}
+        @Test
+        void searchStudents_shouldReturnMultipleStudents() {
+            // Arrange
+            List<String[]> mockResults = Arrays.asList(
+                    new String[]{"123", "Mutahar"},
+                    new String[]{"456", "rajon"}
+            );
+            when(mockDbHelper.searchStudents("J")).thenReturn(mockResults);
+
+            // Act
+            List<String[]> results = studentService.searchStudents("J");
+
+            // Assert
+            assertEquals(2, results.size());
+            assertArrayEquals(new String[]{"123", "Mutahar"}, results.get(0));
+            assertArrayEquals(new String[]{"456", "Rahon"}, results.get(1));
+        }
+    }
