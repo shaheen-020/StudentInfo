@@ -48,6 +48,17 @@ class StudentServiceTest {
 
         assertEquals(0, results.size());
         assertTrue(results.isEmpty());
-    }
+    @ParameterizedTest
+    @ValueSource(strings = {"999", "000", "111"})
+    void idExists_shouldReturnFalse_whenIdNotExists(String rollNumber) {
+        // Arrange
+        when(mockDbHelper.idExists(rollNumber)).thenReturn(false);
 
+        // Act
+        boolean result = studentService.idExists(rollNumber);
+
+        // Assert
+        assertFalse(result);
+        verify(mockDbHelper).idExists(rollNumber);
+    }
 }
